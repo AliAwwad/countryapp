@@ -9,7 +9,7 @@ import AppStore from './store';
 
 export default class App extends React.Component {
 	constructor() {
-		super();
+		super();	
 		this.state = {
 			location:'home',
 			list: AppStore.getItems()
@@ -25,7 +25,11 @@ export default class App extends React.Component {
 	componentDidMount() {
 		AppStore.addChangeListener(this._onChange);
 	}
-	_onAddNote(country) {
+	_onAddNote(countryName, countryPopulation, countryCapitol) {
+		var country = {};
+		country.name = countryName;
+		country.population = countryPopulation;
+		country.capitol = countryCapitol;
 		AppDispatcher.dispatch({
 			actionType : 'ITEM_ADDED',
 			newItem:country

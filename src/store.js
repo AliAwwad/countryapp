@@ -11,9 +11,9 @@ class Store extends EventEmitter {
         let list = JSON.parse(localStorage.getItem('countries') || '[]');
         return list;
     }
-    addItem(text) {
+    addItem(item) {
         let list = this.getItems();
-        list.push({id:list.length+1,value:text});
+        list.push({id:list.length+1,value:item});
         localStorage.setItem('countries', JSON.stringify(list));
     }
     deleteItem(id) {
