@@ -11,9 +11,31 @@ class Store extends EventEmitter {
         let list = JSON.parse(localStorage.getItem('countries') || '[]');
         return list;
     }
+    getItem(id) {
+        let list = JSON.parse(localStorage.getItem('countries') || '[]');
+        var item = list.filter(x => x.item.id===id);
+        if(item.length>0)
+            return item[0];
+        else
+            return false;
+    }
     addItem(item) {
         let list = this.getItems();
-        list.push({id:list.length+1,value:item});
+        //=> this way , if ==-1 then its a new item, so add it to list bottom, else then update
+        if(item.id===-1) {
+            item.id = list.length+1;
+            list.push({item});
+        }
+        else {
+            for(var i = 0; i<list.length;i++) {
+                if(list[i].item.id === item.id)
+                {
+                    list[i].item.name = item.name;
+                    list[i].item.population = item.population;
+                    list[i].item.capitol = item.capitol;
+                }
+            }
+        }
         localStorage.setItem('countries', JSON.stringify(list));
     }
     deleteItem(id) {
