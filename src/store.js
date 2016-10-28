@@ -42,7 +42,7 @@ class Store extends EventEmitter {
         var list2 = [];
         let list = this.getItems();
         for(var i=0; i<list.length;i++){
-            if(list[i].id!==id)
+            if(list[i].item.id!==id)
             list2.push(list[i]);
         }
         list = list2;
